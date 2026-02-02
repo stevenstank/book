@@ -1,4 +1,4 @@
-* {
+            * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -6,7 +6,7 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
     min-height: 100vh;
     padding: 20px;
 }
@@ -21,14 +21,14 @@ header {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 30px;
-    background: white;
+    background: #2a2a2a;
     padding: 20px 30px;
     border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
 
 h1 {
-    color: #333;
+    color: #e0e0e0;
     font-size: 2rem;
 }
 
@@ -43,14 +43,14 @@ h1 {
 }
 
 .btn-primary {
-    background: #667eea;
+    background: #4a4a4a;
     color: white;
 }
 
 .btn-primary:hover {
-    background: #5568d3;
+    background: #3a3a3a;
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
 }
 
 .btn-secondary {
@@ -74,39 +74,39 @@ h1 {
 }
 
 .btn-success {
-    background: #28a745;
-    color: white;
+    background: #ffc107;
+    color: #1a1a1a;
     padding: 8px 16px;
     font-size: 0.9rem;
 }
 
 .btn-success:hover {
-    background: #218838;
+    background: #e0a800;
 }
 
 .btn-warning {
-    background: #ffc107;
-    color: #333;
+    background: #9b59b6;
+    color: white;
     padding: 8px 16px;
     font-size: 0.9rem;
 }
 
 .btn-warning:hover {
-    background: #e0a800;
+    background: #8e44ad;
 }
 
-/* Dialog/Modal Styles */
 dialog {
     border: none;
     border-radius: 10px;
     padding: 0;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    background: #2a2a2a;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
     max-width: 500px;
     width: 90%;
 }
 
 dialog::backdrop {
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.7);
 }
 
 dialog form {
@@ -115,7 +115,7 @@ dialog form {
 
 dialog h2 {
     margin-bottom: 20px;
-    color: #333;
+    color: #e0e0e0;
 }
 
 .form-group {
@@ -125,7 +125,7 @@ dialog h2 {
 .form-group label {
     display: block;
     margin-bottom: 5px;
-    color: #333;
+    color: #e0e0e0;
     font-weight: 600;
 }
 
@@ -133,7 +133,9 @@ dialog h2 {
 .form-group input[type="number"] {
     width: 100%;
     padding: 10px;
-    border: 2px solid #ddd;
+    background: #1a1a1a;
+    color: #e0e0e0;
+    border: 2px solid #444;
     border-radius: 5px;
     font-size: 1rem;
     transition: border-color 0.3s;
@@ -142,7 +144,7 @@ dialog h2 {
 .form-group input[type="text"]:focus,
 .form-group input[type="number"]:focus {
     outline: none;
-    border-color: #667eea;
+    border-color: #666666;
 }
 
 .checkbox-group label {
@@ -168,35 +170,33 @@ dialog h2 {
     flex: 1;
 }
 
-/* Library Grid */
 .library-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 20px;
 }
 
-/* Book Card */
 .book-card {
-    background: white;
+    background: #2a2a2a;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .book-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.5);
 }
 
 .book-card h3 {
-    color: #333;
+    color: #e0e0e0;
     margin-bottom: 10px;
     font-size: 1.3rem;
 }
 
 .book-card p {
-    color: #666;
+    color: #b0b0b0;
     margin-bottom: 8px;
 }
 
@@ -214,13 +214,13 @@ dialog h2 {
 }
 
 .book-card .read-status.read {
-    background: #d4edda;
-    color: #155724;
+    background: #3a3a3a;
+    color: #b0b0b0;
 }
 
 .book-card .read-status.not-read {
-    background: #f8d7da;
-    color: #721c24;
+    background: #1a1a1a;
+    color: #808080;
 }
 
 .book-card .card-buttons {
@@ -232,20 +232,19 @@ dialog h2 {
     flex: 1;
 }
 
-/* Empty state */
 .empty-state {
     text-align: center;
     padding: 60px 20px;
-    background: white;
+    background: #2a2a2a;
     border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
 
 .empty-state h2 {
-    color: #666;
+    color: #b0b0b0;
     margin-bottom: 10px;
 }
 
 .empty-state p {
-    color: #999;
+    color: #808080;
 }

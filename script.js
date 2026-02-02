@@ -1,7 +1,5 @@
-// Library array to store all books
 const myLibrary = [];
 
-// Book constructor
 function Book(title, author, pages, read) {
     this.id = crypto.randomUUID();
     this.title = title;
@@ -10,19 +8,17 @@ function Book(title, author, pages, read) {
     this.read = read;
 }
 
-// Book prototype method to toggle read status
+
 Book.prototype.toggleRead = function() {
     this.read = !this.read;
 };
 
-// Function to add a book to the library
 function addBookToLibrary(title, author, pages, read) {
     const newBook = new Book(title, author, pages, read);
     myLibrary.push(newBook);
     displayBooks();
 }
 
-// Function to display all books
 function displayBooks() {
     const libraryDisplay = document.getElementById('libraryDisplay');
     libraryDisplay.innerHTML = '';
@@ -63,7 +59,6 @@ function displayBooks() {
     });
 }
 
-// Function to remove a book from the library
 function removeBook(bookId) {
     const index = myLibrary.findIndex(book => book.id === bookId);
     if (index !== -1) {
@@ -72,7 +67,6 @@ function removeBook(bookId) {
     }
 }
 
-// Function to toggle read status
 function toggleBookRead(bookId) {
     const book = myLibrary.find(book => book.id === bookId);
     if (book) {
@@ -81,42 +75,34 @@ function toggleBookRead(bookId) {
     }
 }
 
-// DOM elements
 const newBookBtn = document.getElementById('newBookBtn');
 const bookDialog = document.getElementById('bookDialog');
 const bookForm = document.getElementById('bookForm');
 const cancelBtn = document.getElementById('cancelBtn');
 
-// Open dialog when "New Book" button is clicked
 newBookBtn.addEventListener('click', () => {
     bookDialog.showModal();
 });
 
-// Close dialog when "Cancel" button is clicked
 cancelBtn.addEventListener('click', () => {
     bookDialog.close();
     bookForm.reset();
 });
 
-// Handle form submission
 bookForm.addEventListener('submit', (event) => {
-    event.preventDefault(); // Prevent default form submission behavior
+    event.preventDefault();
 
-    // Get form values
     const title = document.getElementById('title').value;
     const author = document.getElementById('author').value;
     const pages = parseInt(document.getElementById('pages').value);
     const read = document.getElementById('read').checked;
 
-    // Add book to library
     addBookToLibrary(title, author, pages, read);
 
-    // Close dialog and reset form
     bookDialog.close();
     bookForm.reset();
 });
 
-// Event delegation for remove and toggle read buttons
 document.getElementById('libraryDisplay').addEventListener('click', (event) => {
     const bookCard = event.target.closest('.book-card');
     if (!bookCard) return;
@@ -130,7 +116,6 @@ document.getElementById('libraryDisplay').addEventListener('click', (event) => {
     }
 });
 
-// Add some sample books for testing
 addBookToLibrary('The Great Gatsby', 'F. Scott Fitzgerald', 180, true);
 addBookToLibrary('To Kill a Mockingbird', 'Harper Lee', 281, false);
 addBookToLibrary('1984', 'George Orwell', 328, true);
