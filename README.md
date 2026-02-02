@@ -1,0 +1,1 @@
+Library app with book management functionality
