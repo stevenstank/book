@@ -1,12 +1,136 @@
-function book(title, author, year){
+// Library array to store all books
+const myLibrary = [];
+
+// Book constructor
+function Book(title, author, pages, read) {
+    this.id = crypto.randomUUID();
     this.title = title;
     this.author = author;
-    this.year = year;
-    this.getSummary = function(){console.log(`${this.title} was written by ${this.author} in ${this.year}`);}
+    this.pages = pages;
+    this.read = read;
 }
 
-const book1 = new book('The Great Adventure', 'Saksham', 2026);
-const book2 = new book('Mystery of the Night', 'Ananya', 2025);
+// Book prototype method to toggle read status
+Book.prototype.toggleRead = function() {
+    this.read = !this.read;
+};
 
-book1.getSummary();
-book2.getSummary();
+// Function to add a book to the library
+function addBookToLibrary(title, author, pages, read) {
+    const newBook = new Book(title, author, pages, read);
+    myLibrary.push(newBook);
+    displayBooks();
+}
+
+// Function to display all books
+function displayBooks() {
+    const libraryDisplay = document.getElementById('libraryDisplay');
+    libraryDisplay.innerHTML = '';
+
+    if (myLibrary.length === 0) {
+        libraryDisplay.innerHTML = `
+            <div class="empty-state">
+                <h2>Your library is empty</h2>
+                <p>Click the "New Book" button to add your first book!</p>
+            </div>
+        `;
+        return;
+    }
+
+    myLibrary.forEach(book => {
+        const bookCard = document.createElement('div');
+        bookCard.classList.add('book-card');
+        bookCard.dataset.bookId = book.id;
+
+        bookCard.innerHTML = `
+            <h3>${book.title}</h3>
+            <div class="book-info">
+                <p><strong>Author:</strong> ${book.author}</p>
+                <p><strong>Pages:</strong> ${book.pages}</p>
+            </div>
+            <span class="read-status ${book.read ? 'read' : 'not-read'}">
+                ${book.read ? '✓ Read' : '✗ Not Read'}
+            </span>
+            <div class="card-buttons">
+                <button class="btn ${book.read ? 'btn-warning' : 'btn-success'} toggle-read-btn">
+                    ${book.read ? 'Mark Unread' : 'Mark Read'}
+                </button>
+                <button class="btn btn-danger remove-btn">Remove</button>
+            </div>
+        `;
+
+        libraryDisplay.appendChild(bookCard);
+    });
+}
+
+// Function to remove a book from the library
+function removeBook(bookId) {
+    const index = myLibrary.findIndex(book => book.id === bookId);
+    if (index !== -1) {
+        myLibrary.splice(index, 1);
+        displayBooks();
+    }
+}
+
+// Function to toggle read status
+function toggleBookRead(bookId) {
+    const book = myLibrary.find(book => book.id === bookId);
+    if (book) {
+        book.toggleRead();
+        displayBooks();
+    }
+}
+
+// DOM elements
+const newBookBtn = document.getElementById('newBookBtn');
+const bookDialog = document.getElementById('bookDialog');
+const bookForm = document.getElementById('bookForm');
+const cancelBtn = document.getElementById('cancelBtn');
+
+// Open dialog when "New Book" button is clicked
+newBookBtn.addEventListener('click', () => {
+    bookDialog.showModal();
+});
+
+// Close dialog when "Cancel" button is clicked
+cancelBtn.addEventListener('click', () => {
+    bookDialog.close();
+    bookForm.reset();
+});
+
+// Handle form submission
+bookForm.addEventListener('submit', (event) => {
+    event.preventDefault(); // Prevent default form submission behavior
+
+    // Get form values
+    const title = document.getElementById('title').value;
+    const author = document.getElementById('author').value;
+    const pages = parseInt(document.getElementById('pages').value);
+    const read = document.getElementById('read').checked;
+
+    // Add book to library
+    addBookToLibrary(title, author, pages, read);
+
+    // Close dialog and reset form
+    bookDialog.close();
+    bookForm.reset();
+});
+
+// Event delegation for remove and toggle read buttons
+document.getElementById('libraryDisplay').addEventListener('click', (event) => {
+    const bookCard = event.target.closest('.book-card');
+    if (!bookCard) return;
+
+    const bookId = bookCard.dataset.bookId;
+
+    if (event.target.classList.contains('remove-btn')) {
+        removeBook(bookId);
+    } else if (event.target.classList.contains('toggle-read-btn')) {
+        toggleBookRead(bookId);
+    }
+});
+
+// Add some sample books for testing
+addBookToLibrary('The Great Gatsby', 'F. Scott Fitzgerald', 180, true);
+addBookToLibrary('To Kill a Mockingbird', 'Harper Lee', 281, false);
+addBookToLibrary('1984', 'George Orwell', 328, true);
